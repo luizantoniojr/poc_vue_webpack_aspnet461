@@ -1,9 +1,10 @@
 ﻿const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 const requireContext = require('require-context');
 
-module.exports = {
+var configuration = {
     target: "web",
 
     resolve: {
@@ -61,10 +62,44 @@ module.exports = {
         new HtmlWebpackPlugin({
             inject: "body",
             filename: "../Views/Shared/_Layout.cshtml",
-            template: "./Views/Shared/_Layout_Template.cshtml"
+            template: "./Views/Shared/_Layout_Template.cshtml",
+            chunks: [
+                "index"
+            ]
+        }),
+
+        new HtmlWebpackPlugin({
+            inject: "body",
+            filename: "./Views/Carro/Index.cshtml",
+            template: "./Views/Shared/Index.cshtml",
+            chunks: [
+                "carro\\index"
+            ]
         })
     ]),
 
     // pretty terminal output
     stats: { colors: true }
 };
+
+
+//Get all files index.ts insert views
+var indexes = requireContext(__dirname + '/src/views', true, /index\.ts$/);
+
+
+//Register all Index.cshtml
+indexes.keys().forEach(function (name) {
+
+    configuration.plugins.push(new HtmlWebpackPlugin({
+        inject: "body",
+        filename: __dirname + "/Views/" + name.replace('index.ts', '') + "Index.cshtml",
+        template: "./Views/Shared/Index.cshtml",
+        chunks: [
+            name.replace('.ts', '')
+        ]
+    }))
+
+})
+
+
+module.exports = configuration;

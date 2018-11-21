@@ -17,6 +17,7 @@ indexes.keys().forEach(function (name) {
     entries[name.replace('.ts', '')] = path.resolve(__dirname, "src/views/" + name)
 })
 
+
 module.exports = Merge(CommonConfig, {
     devtool: "inline-source-map",
 

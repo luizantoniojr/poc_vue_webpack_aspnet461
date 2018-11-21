@@ -158,7 +158,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <None Include="Views\Carro\Index.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
     <TypeScriptCompile Include="src\views\carro\index.ts" />
     <Content Include="webpack.prod.js" />
     <Content Include="webpack.dev.js" />
@@ -186,6 +186,7 @@
     <Folder Include="src\asserts\" />
     <Folder Include="src\components\" />
     <Folder Include="src\plugins\" />
+    <Folder Include="Views\Carro\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />
