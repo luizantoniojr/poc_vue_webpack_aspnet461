@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const Merge = require("webpack-merge");
 const CommonConfig = require("./webpack.common.js");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const requireContext = require('require-context');
 
 // Images, Fonts Loading: https://webpack.js.org/guides/asset-management/
 // LESS Loading: https://webpack.js.org/loaders/scss-loader/
@@ -13,18 +14,29 @@ const extractScss = new ExtractTextPlugin({
     filename: "[name].[contenthash].css"
 });
 
+//Get all files index.ts insert views
+var indexes = requireContext(__dirname + '/src/views', true, /index\.ts$/);
+
+//Register main index.ts
+var entries = {
+    index: path.resolve(__dirname, "src/index.ts"),
+    vendor: [
+        "jquery",
+        "jquery-validation",
+        "bootstrap",
+        "jquery-validation-unobtrusive"
+    ]
+}
+
+//Register all index.ts
+indexes.keys().forEach(function (name) {
+    entries[name.replace('.ts', '')] = path.resolve(__dirname, "src/views/" + name)
+})
+
 module.exports = Merge(CommonConfig, {
     devtool: "hidden-source-map",
 
-    entry: {
-        index: path.resolve(__dirname, 'src/index.ts'),
-        vendor: [
-            "jquery",
-            "jquery-validation",
-            "bootstrap",
-            "jquery-validation-unobtrusive"
-        ]
-    },
+    entry: entries,
 
     output: {
         filename: "[name].[chunkhash].js",

@@ -148,6 +148,7 @@
   <ItemGroup>
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CarroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -157,6 +158,8 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Views\Carro\Index.cshtml" />
+    <TypeScriptCompile Include="src\views\carro\index.ts" />
     <Content Include="webpack.prod.js" />
     <Content Include="webpack.dev.js" />
     <None Include="src\index.scss" />
@@ -180,6 +183,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="src\asserts\" />
+    <Folder Include="src\components\" />
+    <Folder Include="src\plugins\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="package.json" />

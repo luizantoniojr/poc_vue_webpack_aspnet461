@@ -2,14 +2,28 @@
 const webpack = require("webpack");
 const Merge = require("webpack-merge");
 const CommonConfig = require("./webpack.common.js");
+const requireContext = require('require-context');
+
+//Get all files index.ts insert views
+var indexes = requireContext(__dirname + '/src/views', true, /index\.ts$/);
+
+//Register main index.ts
+var entries = {
+    index: path.resolve(__dirname, "src/index.ts")
+}
+
+//Register all index.ts
+indexes.keys().forEach(function (name) {
+    entries[name.replace('.ts', '')] = path.resolve(__dirname, "src/views/" + name)
+})
 
 module.exports = Merge(CommonConfig, {
     devtool: "inline-source-map",
 
-    entry: path.resolve(__dirname, "src/index.ts"),
+    entry: entries,
 
     output: {
-        filename: "bundle.js",
+        filename: '[name].js',
         path: __dirname + "/dist",
         // Making sure the CSS and JS files that are split out do not break the template cshtml.
         publicPath: "/dist/",

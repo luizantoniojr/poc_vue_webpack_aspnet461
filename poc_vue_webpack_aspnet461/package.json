@@ -18,8 +18,10 @@
     "node-sass": "^4.10.0",
     "postcss-loader": "^3.0.0",
     "precss": "^3.1.2",
+    "require-context": "^1.1.0",
     "sass-loader": "^7.1.0",
-    "scss": "^0.2.4"
+    "scss": "^0.2.4",
+    "vue": "^2.5.17"
   },
   "devDependencies": {
     "@types/bootstrap": "^4.1.2",
